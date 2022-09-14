@@ -4,7 +4,13 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const mongoClient = new MongoClient(process.env.MONGO_URI);
-await mongoClient.connect();
-const db = mongoClient.db("routtastore");
+let db;
+
+try {
+    await mongoClient.connect();
+    db = mongoClient.db("routtastore");
+} catch (error) {
+    console.log(error);
+}
 
 export default db;
