@@ -21,7 +21,7 @@ function getForever21Data() {
 
   return promise;
 }
-export async function inserData(req, res) {
+export async function insertData(req, res) {
   try {
     const promise = await getForever21Data();
     promise.data.CatalogProducts.map((product) => {
