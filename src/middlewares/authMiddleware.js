@@ -40,16 +40,22 @@ async function signInValidation(req, res, next) {
 
     try {
         const userExist = await db.collection("users").findOne({ email });
+        
+        if (!userExist) {
+            res.status(401).send({ message: "Incorrect e-mail or password" });
+            return;
+        }
+        
         const passwordIsValid = bcrypt.compareSync(password, userExist.password);
 
-        if (userExist && passwordIsValid) {
-            res.locals.user = userExist;
-            next();
-
-        } else {
+        if (!passwordIsValid) {
             res.status(401).send({ message: "Incorrect e-mail or password" });
+            return;
         }
 
+        res.locals.user = userExist;
+        next();
+        
     } catch (error) {
         console.log(error);
         res.sendStatus(500);

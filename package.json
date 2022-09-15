@@ -18,7 +18,8 @@
     "joi": "^17.6.0",
     "mongo": "^0.1.0",
     "mongodb": "^4.9.1",
-    "uui": "^1.0.7"
+    "uui": "^1.0.7",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.19"
