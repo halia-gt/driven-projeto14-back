@@ -20,6 +20,16 @@ async function signUp(req, res) {
     }
 }
 
+async function singIn(req, res) {
+    try {
+        res.send('ok');
+    } catch (error) {
+        console.log(error);
+        res.sendStatus(500);
+    }
+}
+
 export {
-    signUp
+    signUp,
+    singIn
 }
