@@ -1,5 +1,5 @@
 import db from "../database/db.js";
-import { registerSchema } from "../schemas/authorization.schemas.js";
+import { registerSchema } from "../schemas/authSchemas.js";
 
 async function authValidation(req, res, next) {
     const { username, email, password, confirm_password } = req.body;
