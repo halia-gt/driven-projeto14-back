@@ -2,8 +2,8 @@ import db from "../database/db.js";
 import { registerSchema } from "../schemas/authorization.schemas.js";
 
 async function authValidation(req, res, next) {
-    const { username, email, password } = req.body;
-    const validation = registerSchema.validate({ username, email, password }, { abortEarly: false });
+    const { username, email, password, confirm_password } = req.body;
+    const validation = registerSchema.validate({ username, email, password, confirm_password }, { abortEarly: false });
 
     if (validation.error) {
         const errors = validation.error.details.map(error => error.message);
