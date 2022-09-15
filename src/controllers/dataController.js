@@ -6,9 +6,8 @@ function getForever21Data() {
     method: "GET",
     url: "https://apidojo-forever21-v1.p.rapidapi.com/products/v2/list",
     params: {
-      category: "nav_featured_denim_womens",
-      pageSize: "48",
-      pageNumber: "1",
+      pageSize: "2",
+      pageNumber: "2",
       sortby: "0",
     },
     headers: {
@@ -26,7 +25,7 @@ export async function insertData(req, res) {
     const promise = await getForever21Data();
     promise.data.CatalogProducts.map((product) => {
       db.collection("clothes").insertOne({
-        category: "denimWomen",
+        category: product.CategoryName,
         defaultProductImage: product.DefaultProductImage,
         displayName: product.DisplayName,
         description: product.Description,
@@ -35,11 +34,19 @@ export async function insertData(req, res) {
         listPrice: product.ListPrice,
       });
     });
+    return res.sendStatus(200);
+  } catch (error) {
+    console.log(error);
+    return res.sendStatus(404);
+  }
+}
+export async function getAllProducts(req, res) {
+  try {
     const apiData = await db.collection("clothes").find().toArray();
+    console.log(apiData);
     return res.status(200).send(apiData);
   } catch (error) {
     console.log(error);
+    return res.sendStatus(404);
   }
-
-  return res.sendStatus(404);
 }

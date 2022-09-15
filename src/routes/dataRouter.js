@@ -1,8 +1,10 @@
 import express from "express";
-import { inserData } from "../controllers/dataController.js";
+import { getAllProducts, insertData } from "../controllers/dataController.js";
 
 const dataRouter = express.Router();
 
-dataRouter.get("/data", inserData);
+//Somente rodar uma vez para testar
+dataRouter.get("/insertData", insertData);
+dataRouter.get("/products/list", getAllProducts);
 
 export default dataRouter;
