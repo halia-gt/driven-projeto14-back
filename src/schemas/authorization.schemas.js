@@ -12,7 +12,9 @@ const registerSchema = joi.object({
 
     password: joi.string()
         .min(6)
-        .required()
+        .required(),
+
+    confirm_password: joi.ref('password')
 });
 
 export { registerSchema };
