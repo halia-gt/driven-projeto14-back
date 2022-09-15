@@ -7,6 +7,6 @@ app.use(express.json());
 app.use(cors());
 app.use(router);
 
-app.listen(process.env, () => {
+app.listen(process.env.PORT, () => {
   console.log("Magic happens on port " + process.env.PORT);
 });
