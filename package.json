@@ -1,12 +1,10 @@
 {
   "name": "driven-projeto14-back",
   "version": "1.0.0",
-  "description": "",
   "type": "module",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "description": "",
+  "main": "src/app.js",
+  "scripts": {},
   "keywords": [],
   "author": "",
   "license": "ISC",
