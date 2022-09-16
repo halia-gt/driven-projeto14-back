@@ -6,7 +6,6 @@ async function signUp(req, res) {
     const { username, email, password } = req.body;
     try {
         const passwordHash = bcrypt.hashSync(password, 10);
-
         await db.collection("users").insertOne({
             username,
             email,
