@@ -36,4 +36,21 @@ async function singIn(req, res) {
   }
 }
 
-export { signUp, singIn };
+async function logout(req, res) {
+    const token = res.locals.token;
+
+    try {
+        await db.collection("sessions").deleteOne({ token });
+    
+        res.send({ message: "Logout sucessfully"});
+      } catch (error) {
+        console.log(error);
+        res.sendStatus(500);
+      }
+}
+
+export {
+    signUp,
+    singIn,
+    logout
+};
