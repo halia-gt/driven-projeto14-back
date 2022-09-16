@@ -4,7 +4,6 @@ import { v4 as uuid } from "uuid";
 
 async function signUp(req, res) {
     const { username, email, password } = req.body;
-
     try {
         const passwordHash = bcrypt.hashSync(password, 10);
 
@@ -16,6 +15,7 @@ async function signUp(req, res) {
 
         res.status(201).send({ message: "User created successfully" });
     } catch (error) {
+        
         console.log(error);
         res.sendStatus(500);
     }
