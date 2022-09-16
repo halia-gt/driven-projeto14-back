@@ -6,8 +6,8 @@ function getForever21Data() {
     method: "GET",
     url: "https://apidojo-forever21-v1.p.rapidapi.com/products/v2/list",
     params: {
-      pageSize: "2",
-      pageNumber: "2",
+      pageSize: "48",
+      pageNumber: "3",
       sortby: "0",
     },
     headers: {
