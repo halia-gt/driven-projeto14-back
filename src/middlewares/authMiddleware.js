@@ -26,7 +26,7 @@ async function signUpValidation(req, res, next) {
         
     } catch (error) {
         console.log(error);
-        res.sendStatus(404);
+        res.sendStatus(500);
     }
 }
 
