@@ -14,7 +14,6 @@ async function signUp(req, res) {
 
         res.status(201).send({ message: "User created successfully" });
     } catch (error) {
-        
         console.log(error);
         res.sendStatus(500);
     }
