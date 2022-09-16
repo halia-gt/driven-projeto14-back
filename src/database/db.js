@@ -7,10 +7,10 @@ const mongoClient = new MongoClient(process.env.MONGO_URI);
 let db;
 
 try {
-    await mongoClient.connect();
-    db = mongoClient.db("routtastore");
+  await mongoClient.connect();
+  db = mongoClient.db().admin();
 } catch (error) {
-    console.log(error);
+  console.log(error);
 }
 
 export default db;
