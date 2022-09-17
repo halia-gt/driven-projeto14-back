@@ -1,4 +1,5 @@
 import axios from "axios";
+import { ObjectId } from "mongodb";
 import db from "../database/db.js";
 
 function getForever21Data() {
@@ -42,11 +43,26 @@ export async function insertData(req, res) {
 }
 export async function getAllProducts(req, res) {
   try {
-    const apiData = await db.collection("clothes").find().toArray();
-    console.log(apiData);
-    return res.status(200).send(apiData);
+    const products = await db.collection("clothes").find().toArray();
+    return res.status(200).send(products);
   } catch (error) {
     console.log(error);
     return res.sendStatus(404);
+  }
+}
+
+export async function getProductById(req, res) {
+  const productId = req.params;
+  try {
+    const productInfo = await db
+      .collection("clothes")
+      .find({
+        _id: ObjectId(productId.id),
+      })
+      .toArray();
+    res.status(200).send(productInfo);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(404);
   }
 }
