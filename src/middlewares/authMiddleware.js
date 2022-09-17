@@ -1,8 +1,8 @@
-import db from '../database/db.js';
+import db from "../database/db.js";
 
 async function authMiddleware(req, res, next) {
     const { authorization } = req.headers;
-    const token = authorization?.replace('Bearer ', '');
+    const token = authorization?.replace("Bearer ", "");
     if (!token) {
         res.sendStatus(401);
         return;
@@ -23,7 +23,9 @@ async function authMiddleware(req, res, next) {
             return;
         }
 
+        delete user.password;
         res.locals.token = token;
+        res.locals.user = user;
         next();
 
     } catch (error) {
