@@ -36,7 +36,7 @@ async function singIn(req, res) {
   }
 }
 
-async function getUser(req, res) {
+function getUser(req, res) {
     const user = res.locals.user;
 
     res.send(user);

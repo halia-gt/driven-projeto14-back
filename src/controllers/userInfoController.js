@@ -15,9 +15,11 @@ async function addAddress(req, res) {
     };
 
     try {
-        //await db.collection("users").updateOne(query, newDocument);
+        await db.collection("users").updateOne(query, newDocument);
+        const user = await db.collection("users").findOne({ query });
 
-        res.send({ message: "Address added successfully" });
+        delete user.password;
+        res.send(user);
     } catch (error) {
         console.log(error);
         res.sendStatus(500);
