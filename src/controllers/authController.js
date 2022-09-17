@@ -36,6 +36,12 @@ async function singIn(req, res) {
   }
 }
 
+async function getUser(req, res) {
+    const user = res.locals.user;
+
+    res.send(user);
+}
+
 async function logout(req, res) {
     const token = res.locals.token;
 
@@ -52,5 +58,6 @@ async function logout(req, res) {
 export {
     signUp,
     singIn,
+    getUser,
     logout
 };

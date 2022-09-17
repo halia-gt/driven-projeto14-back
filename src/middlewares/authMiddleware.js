@@ -23,7 +23,9 @@ async function authMiddleware(req, res, next) {
             return;
         }
 
+        delete user.password;
         res.locals.token = token;
+        res.locals.user = user;
         next();
 
     } catch (error) {
