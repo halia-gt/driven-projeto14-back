@@ -15,7 +15,7 @@ async function signUpValidation(req, res, next) {
 
     try {
 
-        const userExist = await db.collection('users').findOne({ email });
+        const userExist = await db.collection("users").findOne({ email });
 
         if (userExist) {
             res.status(409).send({ message: "You already have an account associated with this e-mail address"});
