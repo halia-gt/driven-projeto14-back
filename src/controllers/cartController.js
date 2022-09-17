@@ -39,7 +39,21 @@ async function getUserCart(req, res) {
     }
 }
 
+async function removeItemCart(req, res) {
+    const { productId } = req.params;
+    
+    try {
+        await db.collection("carts").deleteOne({ _id: ObjectId(productId) });
+
+        res.send({ message: "Product removed successfully" });
+    } catch (error) {
+        console.log(error);
+        res.sendStatus(500);
+    }
+}
+
 export {
     addToCart,
-    getUserCart
+    getUserCart,
+    removeItemCart
 };

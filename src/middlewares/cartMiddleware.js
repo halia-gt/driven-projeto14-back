@@ -1,6 +1,8 @@
+import { ObjectId } from "mongodb";
+import db from "../database/db.js";
 import { cartSchema } from "../schemas/cartSchemas.js";
 
-async function productValidation(req, res, next) {
+function productValidation(req, res, next) {
     const { productId, name, size, color, price, image } = req.body;
     const validation = cartSchema.validate({ productId, name, size, color, price, image }, { abortEarly: false });
 
@@ -14,4 +16,27 @@ async function productValidation(req, res, next) {
     next();
 }
 
-export { productValidation };
+async function productIdValidation(req, res, next) {
+    const { productId } = req.params;
+    if (!productId.match(/^[0-9a-fA-F]{24}$/)) {
+        res.sendStatus(400);
+        return;
+    }
+
+    try {
+        const product = await db.collection("carts").findOne({ _id: ObjectId(productId) });
+
+        if (!product) {
+            res.status(404).send({ message: "Product not found" });
+            return;
+        }
+
+        next();
+
+    } catch (error) {
+        console.log(error);
+        res.sendStatus(502);
+    }
+}
+
+export { productValidation, productIdValidation };
