@@ -7,5 +7,6 @@ const router = express.Router();
 
 router.use(authMiddleware);
 router.post("/cart", productValidation, cartController.addToCart);
+router.get("/cart", cartController.getUserCart);
 
 export default router;

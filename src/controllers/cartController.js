@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import db from "../database/db.js";
 
 async function addToCart(req, res) {
@@ -13,6 +14,8 @@ async function addToCart(req, res) {
         userId: user._id
     }
 
+    console.log(cart)
+
     try {
         await db.collection("carts").insertOne(cart);
 
@@ -23,6 +26,20 @@ async function addToCart(req, res) {
     }
 }
 
+async function getUserCart(req, res) {
+    const user = res.locals.user;
+
+    try {
+        const cart = await db.collection("carts").find({ userId: user._id }).toArray();
+
+        res.send(cart);
+    } catch (error) {
+        console.log(error);
+        res.sendStatus(500);
+    }
+}
+
 export {
-    addToCart
+    addToCart,
+    getUserCart
 };
