@@ -21,7 +21,7 @@ function getForever21Data() {
 
   return promise;
 }
-export async function insertData(req, res) {
+async function insertData(req, res) {
   try {
     const promise = await getForever21Data();
     promise.data.CatalogProducts.map((product) => {
@@ -41,7 +41,7 @@ export async function insertData(req, res) {
     return res.sendStatus(404);
   }
 }
-export async function getAllProducts(req, res) {
+async function getAllProducts(req, res) {
   try {
     const products = await db.collection("clothes").find().toArray();
     return res.status(200).send(products);
@@ -51,7 +51,7 @@ export async function getAllProducts(req, res) {
   }
 }
 
-export async function getProductById(req, res) {
+async function getProductById(req, res) {
   const productId = req.params;
   try {
     const productInfo = await db
@@ -66,7 +66,7 @@ export async function getProductById(req, res) {
     res.sendStatus(404);
   }
 }
-export async function getProductByCategory(req, res) {
+async function getProductByCategory(req, res) {
   const categoryKey = req.params;
   let categoryId;
 
@@ -115,3 +115,5 @@ export async function getProductByCategory(req, res) {
     res.sendStatus(404);
   }
 }
+
+export { getProductByCategory, getProductById, getAllProducts, getForever21Data };
