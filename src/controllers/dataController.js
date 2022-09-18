@@ -66,3 +66,52 @@ export async function getProductById(req, res) {
     res.sendStatus(404);
   }
 }
+export async function getProductByCategory(req, res) {
+  const categoryKey = req.params;
+  let categoryId;
+
+  switch (categoryKey.category) {
+    case "Summer Collection":
+      categoryId = [
+        "bottom_jeans",
+        "lingerie",
+        "top_blouses",
+        "bottoms_shorts",
+        "dress",
+        "activewear",
+        "bottoms_pants",
+      ];
+      break;
+
+    case "Winter Collection":
+      categoryId = [
+        "sweater",
+        "rompers_jumpsuits",
+        "outerwear_coats_and_jackets",
+      ];
+      break;
+
+    case "Shoes":
+      categoryId = "shoes";
+      break;
+
+    case "Accesories":
+      categoryId = ["acc_jewelry", "acc_beauty_makeup"];
+      break;
+
+    default:
+      break;
+  }
+  try {
+    const products = await db.collection("clothes").find().toArray();
+    const filteredList = products.filter((product) => {
+      return (
+        categoryId.includes(product.category) || product.category === categoryId
+      );
+    });
+    res.status(200).send(filteredList);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(404);
+  }
+}
