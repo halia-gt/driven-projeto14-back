@@ -21,14 +21,14 @@ const cardSchema = joi.object({
     name: joi.string()
         .required(),
     
-    cardNumber: joi.string()
+    cardNumber: joi.number()
         .length(16)
         .required(),
 
     expireDate: joi.string()
         .required(),
     
-    cvv: joi.string()
+    cvv: joi.number()
         .length(3)
         .required()
 });
