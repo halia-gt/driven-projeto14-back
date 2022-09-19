@@ -1,14 +1,13 @@
 import express from "express";
-import {
-  getAllProducts,
-  getProductById,
-  insertData,
-} from "../controllers/dataController.js";
+import * as dataController from "../controllers/dataController.js";
+import { authMiddleware } from "../middlewares/authMiddleware.js";
 
-const dataRouter = express.Router();
+const router = express.Router();
 
 //Somente rodar uma vez para testar
 //dataRouter.get("/insertData", insertData);
-dataRouter.get("/products/list", getAllProducts);
-dataRouter.get("/products/:id", getProductById);
-export default dataRouter;
+router.use(authMiddleware);
+router.get("/products/list", dataController.getAllProducts);
+router.get("/products/:id", dataController.getProductById);
+router.get("/category/:category", dataController.getProductByCategory);
+export default router;
