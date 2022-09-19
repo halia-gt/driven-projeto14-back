@@ -18,6 +18,8 @@ async function addOrder(req, res) {
 
         await db.collection("orders").insertOne(order);
 
+        await db.collection("carts").deleteMany({ userId: user._id });
+
         res.send({ message: "Order created successfully" });
     } catch (error) {
         console.log(error);
