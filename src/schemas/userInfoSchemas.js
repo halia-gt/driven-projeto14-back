@@ -17,4 +17,20 @@ const addressSchema = joi.object({
         .required()
 });
 
-export { addressSchema };
+const cardSchema = joi.object({
+    name: joi.string()
+        .required(),
+    
+    cardNumber: joi.string()
+        .length(16)
+        .required(),
+
+    expireDate: joi.string()
+        .required(),
+    
+    cvv: joi.string()
+        .length(3)
+        .required()
+});
+
+export { addressSchema, cardSchema };
